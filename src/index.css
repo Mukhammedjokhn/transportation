@@ -7,6 +7,22 @@
 :root,
 html,
 body {
-  font-family: "Poppins", serif;
+  font-family: "Poppins", sans-serif;
   background-color: #fafafa;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4a6dff;
+  border-radius: 10px;
+  /* text-transform: ; */
 }

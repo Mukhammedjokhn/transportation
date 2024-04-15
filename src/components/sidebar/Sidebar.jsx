@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { PiPackageDuotone } from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import "./Sidebar.css";
 import { TbPackages } from "react-icons/tb";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
+import { FaChevronDown } from "react-icons/fa6";
 import { LuPackageCheck, LuPackagePlus } from "react-icons/lu";
 import { FaTruckFast } from "react-icons/fa6";
 import { GrAnalytics } from "react-icons/gr";
@@ -14,33 +16,36 @@ import { HiChatBubbleLeftRight } from "react-icons/hi2";
 const SidebarMenu = ({ to, Icon, label, menuData }) => {
   return menuData ? (
     menuData?.map((item, index) => (
-      <div key={index} className="min-h-13 w-full sidebar-links cursor-pointer">
+      <div
+        key={index}
+        className={`${
+          item.activePackage ? "h-44" : "h-[50px]"
+        } w-full sidebar-links cursor-pointer overflow-hidden`}
+      >
         <div
           onClick={item.setActivePackage}
           className="flex items-center gap-3"
         >
           <item.Icon className="text-xl" />
           <p className="flex-1 font-medium select-none">{item.label}</p>
-          {item.activePackage ? (
-            <FaChevronUp className="text-xs" />
-          ) : (
-            <FaChevronDown className="text-xs" />
-          )}
+          <FaChevronDown
+            className={`text-xs ${
+              item.activePackage ? "rotate-[180deg]" : "rotate-0"
+            } duration-200`}
+          />
         </div>
-        {item.activePackage && (
-          <div className="w-full mt-6">
-            {item.menu?.map((item, index) => (
-              <NavLink
-                key={index}
-                to={item.to}
-                className={"w-full flex items-center gap-3 sidebar-links"}
-              >
-                <item.Icon className="text-xl" />
-                <p className="font-medium">{item.label}</p>
-              </NavLink>
-            ))}
-          </div>
-        )}
+        <div className="w-full mt-6">
+          {item.menu?.map((item, index) => (
+            <NavLink
+              key={index}
+              to={item.to}
+              className={"w-full flex items-center gap-3 sidebar-links"}
+            >
+              <item.Icon className="text-xl" />
+              <p className="font-medium">{item.label}</p>
+            </NavLink>
+          ))}
+        </div>
       </div>
     ))
   ) : (
